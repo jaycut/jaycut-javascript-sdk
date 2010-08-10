@@ -5,13 +5,14 @@ h2. Usage
 <div id="jaycut-editor"></div>
 
 <!-- Include the SDK. This is if you use a local fork, we also host the JS SDK on 
-http://api.jaycut.com/javascripts/sdk-VERSION.js -->
+http://api.jaycut.com/javascripts/sdk.VERSION.js
+Example: http://api.jaycut.com/javascripts/sdk.0.1.js -->
 <script src="js-sdk.js" type="text/javascript"></script>
 <script type="text/javascript">
         // Site name (you picked this when you signed up for an API account at JayCut.com)
 	var site_name = "mydogvideosite"; 
         
-        // Login URL (read more about login urls here: TODOOOOO
+        // Login URL
         var login_url = 'YOUR-LOGIN-URL-HERE';
 	JC.init('YOUR-SITE-NAME-HERE', );
 </script>
