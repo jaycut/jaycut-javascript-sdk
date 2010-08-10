@@ -8,7 +8,11 @@ h2. Usage
 http://api.jaycut.com/javascripts/sdk-VERSION.js -->
 <script src="js-sdk.js" type="text/javascript"></script>
 <script type="text/javascript">
-	// Call JC init 
-	JC.init('mpj', '<%= @login_url %>');
+        // Site name (you picked this when you signed up for an API account at JayCut.com)
+	var site_name = "mydogvideosite"; 
+        
+        // Login URL (read more about login urls here: TODOOOOO
+        var login_url = 'YOUR-LOGIN-URL-HERE';
+	JC.init('YOUR-SITE-NAME-HERE', );
 </script>
 </code></pre>
