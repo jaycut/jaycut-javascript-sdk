@@ -1,0 +1,14 @@
+h2. Usage
+
+<pre><code>
+<!-- This is where the editor will be inserted  -->
+<div id="jaycut-editor"></div>
+
+<!-- Include the SDK. This is if you use a local fork, we also host the JS SDK on 
+http://api.jaycut.com/javascripts/sdk-VERSION.js -->
+<script src="js-sdk.js" type="text/javascript"></script>
+<script type="text/javascript">
+	// Call JC init 
+	JC.init('mpj', '<%= @login_url %>');
+</script>
+</code></pre>
