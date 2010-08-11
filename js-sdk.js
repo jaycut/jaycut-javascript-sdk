@@ -12,7 +12,11 @@ function ensureSWFObjectScriptIsLoaded() {
 }
 
 var _jaycut = {
+	
 	__event_handlers: [],
+	__loaderUri = null,
+	__appUri = null,
+
 	subscribe: function(event_name, func) {
 		// TODO: Validate event name
 		_jaycut.__event_handlers[event_name] = func;
@@ -23,13 +27,23 @@ var _jaycut = {
 			func(data);
 		}		
 	},
+	overrideLoaderUri = function(uri) {
+		this.__loaderUri = uri;		
+	},
+	overideApplicationUri = function(uri) {
+		this.__appUri = uri;	
+	},
 	init: function(site_name, login_uri) {	
-		var loaderUrl = 'http://' + site_name + '.api.jaycut.com/assets/flash/ApplicationLoader.swf'
-	    var flashvars = {};
-
-		var app_url = 'http://' + site_name + '.api.jaycut.com/applets/login.xml?chain=mixer';
-	    flashvars.applicationUri = encodeURIComponent(app_url);
-	    flashvars.loginUri = encodeURIComponent(login_uri);
+		
+		if (this.__loaderUri == null)                              
+			this.__loaderUri = 'http://' + site_name + '.api.jaycut.com/assets/flash/ApplicationLoader.swf'
+	    
+        if (this.__appUri == null)
+			this.__app_Uri = 'http://' + site_name + '.api.jaycut.com/applets/login.xml?chain=mixer';
+	    
+		var flashvars = {};
+		flashvars.applicationUri = encodeURIComponent(this.__app_Uri);
+	    flashvars.loginUri = encodeURIComponent(this.__loaderUri);
 
 	    var params = {};
 	    params.wmode = 'window';
@@ -42,7 +56,7 @@ var _jaycut = {
 		__run_when_swfobject_available(function() {
 			swfobject.embedSWF(loaderUrl, 'jaycut-editor', '100%', '100%', '9.0.0', loaderUrl, flashvars, params);
 		});			
-	}	
+	}
 };
 
 var __run_when_swfobject_available = function(func) {
