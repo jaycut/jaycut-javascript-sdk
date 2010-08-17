@@ -13,25 +13,31 @@ function ensureSWFObjectScriptIsLoaded() {
 
 var _jaycut = {
 	
-	__event_handlers: [],
-	__loaderUri = null,
-	__appUri = null,
+	__event_handlers: {},
+	__loaderUri: null,
+	__appUri:  null,
+	__chainUri: null,
 
 	subscribe: function(event_name, func) {
-		// TODO: Validate event name
-		_jaycut.__event_handlers[event_name] = func;
+		this.__event_handlers[event_name] = func;
 	},
 	trigger: function(event_name, data) {
-		if (this.__event_handlers[event_name] != null) {
-			var func = _jaycut.__event_handlers[event_name];
-			func(data);
+		var func = this.__event_handlers[event_name]; 
+		if (func != null) {
+			if (data)	
+				func(data);
+			else
+				func();
 		}		
 	},
-	overrideLoaderUri = function(uri) {
+	overrideLoaderUri: function(uri) {
 		this.__loaderUri = uri;		
 	},
-	overideApplicationUri = function(uri) {
+	overrideApplicationUri: function(uri) {
 		this.__appUri = uri;	
+	},
+	overrideChainUri: function(uri) {
+		this.__chainUri = uri;
 	},
 	init: function(site_name, login_uri) {	
 		
@@ -42,8 +48,10 @@ var _jaycut = {
 			this.__app_Uri = 'http://' + site_name + '.api.jaycut.com/applets/login.xml?chain=mixer';
 	    
 		var flashvars = {};
-		flashvars.applicationUri = encodeURIComponent(this.__app_Uri);
+		flashvars.applicationUri = encodeURIComponent(this.__appUri);
 	    flashvars.loginUri = encodeURIComponent(this.__loaderUri);
+        if (this.__chainUri != null)
+			flashvars.chainUri = this.__chainUri;
 
 	    var params = {};
 	    params.wmode = 'window';
@@ -54,7 +62,7 @@ var _jaycut = {
 		ensureSWFObjectScriptIsLoaded();
 		
 		__run_when_swfobject_available(function() {
-			swfobject.embedSWF(loaderUrl, 'jaycut-editor', '100%', '100%', '9.0.0', loaderUrl, flashvars, params);
+			swfobject.embedSWF(_jaycut.__loaderUri, 'jaycut-editor', '100%', '100%', '9.0.0', _jaycut.__loaderUri, flashvars, params);
 		});			
 	}
 };
@@ -67,7 +75,4 @@ var __run_when_swfobject_available = function(func) {
 } 
  
  
-
-
-
-
+var JC = _jaycut; // shorthand!               
