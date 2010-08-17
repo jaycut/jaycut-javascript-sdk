@@ -1,4 +1,5 @@
 h2. Usage
+
 The below is a simple case of implementing the editor.
 
 <pre><code>
@@ -41,7 +42,7 @@ The editor triggers various events, that you can listen to via the JavaScript SD
 <script src="http://api.jaycut.com/javascripts/sdk.0.2.js" type="text/javascript"></script> 
 <script type="text/javascript">
 JC.subscribe('load_completed', function() {
-	
+
 	// event: load_completed
 	// Fired when the editor itself has loaded (does not include media clips)
 	// event data: none
@@ -55,7 +56,7 @@ JC.subscribe('mix_export_created', function(data) {
 	// Fired when a user has created an export (i.e. clicked the publish/export button
 	// and went through the publish tutorial)
 	// event_data: export_id 
-    alert("An export has been created, and it has ID " + data.export_id);                                
+	alert("An export has been created, and it has ID " + data.export_id);                                
 
 });
 
