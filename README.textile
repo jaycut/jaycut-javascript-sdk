@@ -79,3 +79,12 @@ JC.init(authority, login_uri );
 </html>
 
 </code></pre>
+
+
+h3. SWFObject from your own domain
+
+You might have noticed that the JavaScript SDK includes SWFObject from ajax.googleapis.com, 
+and you might prefer to host swfobject from your own domain (because it reduces DNS lookups,
+or just because it looks nice). To do this, simply host and load Swfobject yourself before you
+load the JayCut Javascript SDK - if the SDK find that SWFobject is already loaded, it will use that,
+and will not load the SWFObject from Google.
