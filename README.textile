@@ -15,9 +15,19 @@ The below is a simple case of implementing the editor.
 
 <script src="http://api.jaycut.com/javascripts/sdk.0.2.js" type="text/javascript"></script> 
 <script type="text/javascript">
-var site_name = "mydogvideosite"; // you selected a site name when you signed up for an API account at JayCut.com.
-var login_uri = 'YOUR-LOGIN-URL-HERE'; // Login URI is generated server side.
-JC.init('YOUR-SITE-NAME-HERE', login_uri );
+
+var uri_authority = "cutedogsite.api.jaycut.com";
+// uri_authority will be in the format YOURSITENAMEHERE.api.jaycut.com. 
+// Site name is something you manually picked when signing up for API access, you
+// can find it in your welcome email along with your API secret. 
+// If you are using CNAME aliasing, you can put your domain alias here.i
+
+var login_uri = 'YOUR-LOGIN-URL-HERE';
+// login_uri is an url that you have to generate server side. There
+// are plenty of tutorials on the developer section of Jaycut.com on
+// how to generate a login_uri using your server side language of choice.
+
+JC.init(uri_authority, login_uri );
 </script>
 </body>
 </html>     
@@ -61,9 +71,9 @@ JC.subscribe('mix_export_created', function(data) {
 });
 
 
-var site_name = "mydogvideosite"; // you selected a site name when you signed up for an API account at JayCut.com.
+var authority = "mydogvideosite.api.jaycut.com"; 
 var login_uri = 'YOUR-LOGIN-URL-HERE'; // Login URI is generated server side.
-JC.init('YOUR-SITE-NAME-HERE', login_uri );
+JC.init(authority, login_uri );
 </script>
 </body>
 </html>
