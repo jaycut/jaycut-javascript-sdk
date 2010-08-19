@@ -25,9 +25,9 @@ var _jaycut = {
 		var func = this.__event_handlers[event_name]; 
 		if (func != null) {
 			if (data)	
-				func(data);
+				return func(data);
 			else
-				func();
+				return func();
 		}		
 	},
 	overrideLoaderUri: function(uri) {
@@ -49,7 +49,11 @@ var _jaycut = {
 	    
 		var flashvars = {};
 		flashvars.applicationUri = encodeURIComponent(this.__appUri);
-	    flashvars.loginUri = encodeURIComponent(login_uri);
+	    if (login_uri == null)
+			// Why does this work?
+			flashvars.loginUri = encodeURIComponent(this.__loaderUri);
+		else
+        	flashvars.loginUri = encodeURIComponent(login_uri);       
         if (this.__chainUri != null)
 			flashvars.chainUri = this.__chainUri;
 
