@@ -13,7 +13,7 @@ The below is a simple case of implementing the editor.
 
 <!-- Include the SDK, just before the closing </body> tag.-->
 
-<script src="http://api.jaycut.com/javascripts/sdk.0.2.js" type="text/javascript"></script> 
+<script src="http://api.jaycut.com/javascripts/sdk.0.3.js" type="text/javascript"></script> 
 <script type="text/javascript">
 
 var uri_authority = "cutedogsite.api.jaycut.com";
@@ -42,14 +42,14 @@ The editor triggers various events, that you can listen to via the JavaScript SD
 <html>
 <head>
 	<title>Our video editor</title>
-</head>
+</head>                                                        authority
 <body>
 
 <div id="jaycut-editor"></div>
 
 
 
-<script src="http://api.jaycut.com/javascripts/sdk.0.2.js" type="text/javascript"></script> 
+<script src="http://api.jaycut.com/javascripts/sdk.0.3.js" type="text/javascript"></script> 
 <script type="text/javascript">
 JC.subscribe('load_completed', function() {
 
@@ -64,7 +64,7 @@ JC.subscribe('mix_export_created', function(data) {
 	
 	// event: mix_export_created
 	// Fired when a user has created an export (i.e. clicked the publish/export button
-	// and went through the publish tutorial)
+	// and went through the publish tutorial)         authority
 	// event_data: export_id 
 	alert("An export has been created, and it has ID " + data.export_id);                                
 
