@@ -39,17 +39,17 @@ var _jaycut = {
 	overrideChainUri: function(uri) {
 		this.__chainUri = uri;
 	},
-	init: function(site_name, login_uri) {	
+	init: function(uri_authority, login_uri) {	
 		
 		if (this.__loaderUri == null)                              
-			this.__loaderUri = 'http://' + site_name + '.api.jaycut.com/assets/flash/ApplicationLoader.swf'
+			this.__loaderUri = 'http://' + uri_authority + '/assets/flash/ApplicationLoader.swf'
 	    
         if (this.__appUri == null)
-			this.__app_Uri = 'http://' + site_name + '.api.jaycut.com/applets/login.xml?chain=mixer';
+			this.__appUri = 'http://' + uri_authority + '/applets/login.xml?chain=mixer';
 	    
 		var flashvars = {};
 		flashvars.applicationUri = encodeURIComponent(this.__appUri);
-	    flashvars.loginUri = encodeURIComponent(this.__loaderUri);
+	    flashvars.loginUri = encodeURIComponent(login_uri);
         if (this.__chainUri != null)
 			flashvars.chainUri = this.__chainUri;
 
@@ -76,3 +76,5 @@ var __run_when_swfobject_available = function(func) {
  
  
 var JC = _jaycut; // shorthand!               
+
+
