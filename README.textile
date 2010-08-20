@@ -60,10 +60,10 @@ JC.subscribe('load_completed', function() {
 
 });
 
-JC.subscribe('mix_export_created', function(data) {
+JC.subscribe('mix_export_requested', function(data) {
 	
-	// event: mix_export_created
-	// Fired when a user has created an export (i.e. clicked the publish/export button
+	// event: mix_export_requested
+	// Fired when a user has requested an export (i.e. clicked the publish/export button
 	// and went through the publish tutorial)         authority
 	// event_data: export_id 
 	alert("An export has been created, and it has ID " + data.export_id);                                
