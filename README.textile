@@ -60,7 +60,7 @@ JC.subscribe('load_completed', function() {
 
 });
 
-JC.subscribe('mix_export_created', function(data) {
+JC.subscribe('mix_export_requested', function(data) {
 	
 	// event: mix_export_created
 	// Fired when a user has created an export (i.e. clicked the publish/export button
