@@ -1,3 +1,6 @@
+h1. JayCut Mixer Javascript SDK
+This is the JavaScript SDK for including the JayCut Mixer on your web site. It is official, but it has not been in the wild for long - keep the feedback coming, please!
+
 h2. Usage
 
 The below is a simple case of implementing the editor.
