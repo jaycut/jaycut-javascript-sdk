@@ -65,8 +65,19 @@ JC.subscribe('mix_export_requested', function(data) {
 	// event: mix_export_requested
 	// Fired when a user has requested an export (i.e. clicked the publish/export button)
 	// event_data: mix_id 
-	alert("An export has been created, and it has ID " + data.mix_id);                                
+	alert("An export has been requested of Mix with ID " + data.mix_id);                                
 });
+
+JC.subscribe('mix_export_created', function(data) {
+	
+	// event: mix_export_requested
+	// Fired when a user has requested an export (i.e. clicked the publish/export button)
+	// event_data: export_id 
+        // NOTE: export_id is the ID of the export object, NOT the mix. Also note that
+        // that the export has been created, not necessarily finished rendering.
+	alert("An export has been created, and it has ID " + data.export_id);                                
+});
+
 
 
 var authority = "mydogvideosite.api.jaycut.com"; 
