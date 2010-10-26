@@ -74,12 +74,24 @@ JC.subscribe('mix_export_requested', function(data) {
 
 JC.subscribe('mix_export_created', function(data) {
 	
-	// event: mix_export_requested
+	// event: mix_export_created
 	// Fired when a user has created an export (i.e. completed the youtube exporter wizard, for instance)
 	// event_data: export_id 
         // NOTE: export_id is the ID of the export object, NOT the mix. Also note that
-        // that the export has been created, not necessarily finished rendering.
+        // that the export has been created, not necessarily finished rendering. Also, keep in
+        // mind that the mixer does other things after this event (such as publishing) 
+        // so you should be careful when using mix_export_created as a cue to navigate away from the mixer.
+        // Consider using mix_published instead.
 	alert("An export has been created, and it has ID " + data.export_id);                                
+});
+
+JC.subscribe('mix_published', function(data) {
+	
+	// event: mix_published
+	// This is fired right after mix_export_created. 
+	// event_data: mix_id 
+        // NOTE: The mix has only been published, not necessarily finished rendering.
+	alert("An export has been created, and it has ID " + data.mix_id);                                
 });
 
 
