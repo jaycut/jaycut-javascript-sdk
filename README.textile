@@ -17,26 +17,110 @@ The below is a simple case of implementing the editor.
 
 <!-- Include the SDK, just before the closing </body> tag.-->
 
-<script src="http://api.jaycut.com/assets/javascripts/sdk.0.3.1.js" type="text/javascript"></script> 
+<script src="http://api.jaycut.com/assets/javascripts/sdk.0.4.1.js" type="text/javascript"></script> 
 <script type="text/javascript">
 
 var uri_authority = "cutedogsite.api.jaycut.com";
 // uri_authority will be in the format YOURSITENAMEHERE.api.jaycut.com. 
 // Site name is something you manually picked when signing up for API access, you
 // can find it in your welcome email along with your API secret. 
-// If you are using CNAME aliasing, you can put your domain alias here.i
+// If you are using CNAME aliasing, you can put your domain alias here.
 
 var login_uri = 'YOUR-LOGIN-URL-HERE';
 // login_uri is an url that you have to generate server side. There
 // are plenty of tutorials on the developer section of Jaycut.com on
 // how to generate a login_uri using your server side language of choice.
 
-JC.init(uri_authority, login_uri );
+
+// The options hash can contain more but this is the bare minimum
+var options = {
+  'uri_authority': uri_authority,
+  'login_uri': login_uri
+}
+
+JC.init(options)
+
+
 </script>
 </body>
 </html>     
 
 </code></pre>
+
+In versions prior to 0.4.1, the JC.init did not take an options hash,
+but only the uri_authority and the login_uri:
+
+<pre><code>
+JC.init(uri_authority, login_uri );
+</code></pre>
+
+h3. Options
+
+Since version 0.4.1 the JC.init call takes a hash as only
+argument. This hash may contain additional configuration data aside
+from the mandatory uri_authority and login_uri.
+
+* @version@ - Set which version of the loaded applet to use. Default: 2
+* @applet@ - Which applet to load. Default 'login'
+* @chain@ - Which applet to chain load. Default 'mixer'
+* @embed_target@ - Id of the html tag that will be replaced with the embedded object. Default 'jaycut-editor'
+* @embed_width@ - Width of the embedded flash object. Either absolute (e.g '800px') or relative ( e.g '100%'). Default '100%'
+* @embed_height@ - Height of the embedded flash object.
+* @chain_params@ - Parameters to the chain-loaded applet as a hash. Default '{}'
+* @flash_params@ - Flash embedding parameters
+** @wmode@ - Default 'window'
+** @allowScriptAccess@ - Default 'always'
+** @allowFullScreen@ - Default 'true'
+** @bgcolor@ - Default '#000000'
+
+Also, all the options configurable as flashVars according to the
+reference documentation are available as options. This includes among
+others:
+
+* @noMicrophone@
+* @noWebcam@
+* @noUpload@
+* @locale@
+
+Here's an example of a more customized embedding of the editor
+
+<pre><code>
+<html>
+<head><title>Our video editor</title></head>
+<body>          
+<!-- This is where the editor will be inserted, you can place it anywhere you need it.  -->
+<div id="editor-goes-here"></div>
+
+<!-- Include the SDK, just before the closing </body> tag.-->
+
+<script src="http://api.jaycut.com/assets/javascripts/sdk.0.4.0.js" type="text/javascript"></script> 
+<script type="text/javascript">
+
+var options = {
+  'uri_authority': "cutedogsite.api.jaycut.com",
+  'login_uri': 'YOUR-LOGIN-URL-HERE',
+  'version': 2,
+  'noMicrophone': true,
+  'noWebcam': true,
+  'embed_target': 'editor-goes-here',
+  'chain_params': {
+     'feeds': [ 'shared_videos', 'shared_images' ],
+     'filter': { 'shared_videos': { 'category_id': '5' } }
+  },
+  'flashparams': {
+     'bgcolor': '#ffffff',
+     'wmode': 'transparent'
+  }
+}
+
+JC.init(options)
+
+</script>
+</body>
+</html>     
+
+</code></pre>
+
 
 h3. Events
 
