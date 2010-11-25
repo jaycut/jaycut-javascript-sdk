@@ -40,6 +40,7 @@ var _jaycut = {
         'noOpenSave': true,
         'noWebcam': true,
         'noMicrophone': true,
+        'noDrawings': true,
         'mix': true,
         'remix': true,
         'redirectOnPublish': true,
@@ -68,14 +69,20 @@ var _jaycut = {
         this.__appUri = uri;
     },
     init: function(options) {
+        var flashopts = Array();
+        for (var k in this.__flashoptions) {
+            flashopts[k] = k
+            flashopts[camelToUnderscore(k)] = k
+        }
+
         if (options != null) {
             for (var key in options) {
                 if (key == 'flashparams') {
                     for (var k in options['flashparams']) {
                         this.__flashparams[k] = options['flashparams'][k]
                     }
-                } else if (this.__flashoptions[key] == true) {
-                    this.__flashvars[key] = options[key];
+                } else if (flashopts[key] != null) {
+                    this.__flashvars[flashopts[key]] = options[key];
                 } else {
                     this.__options[key] = options[key]
                 }
@@ -123,6 +130,10 @@ function isArray(obj) {
 
 function isString(obj) {
     return obj.constructor == String;
+}
+
+function camelToUnderscore(str){
+    return str.replace(/([A-Z])/g, function($1) { return "_" + $1.toLowerCase(); } );
 }
 
 function build_chain_params(cp_hash) {

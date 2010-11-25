@@ -74,12 +74,14 @@ from the mandatory uri_authority and login_uri.
 ** @bgcolor@ - Default '#000000'
 
 Also, all the options configurable as flashVars according to the
-reference documentation are available as options. This includes among
+reference documentation are available as options. The flashVars are in
+camelCase format in this context they may also be written using
+underscores, like the other options. Valid options include among
 others:
 
 * @noMicrophone@
-* @noWebcam@
-* @noUpload@
+* @no_webcam@
+* @no_upload@
 * @locale@
 
 Here's an example of a more customized embedding of the editor
@@ -100,8 +102,8 @@ var options = {
   'uri_authority': "cutedogsite.api.jaycut.com",
   'login_uri': 'YOUR-LOGIN-URL-HERE',
   'version': 2,
-  'noMicrophone': true,
-  'noWebcam': true,
+  'no_microphone': true,
+  'no_webcam': true,
   'embed_target': 'editor-goes-here',
   'chain_params': {
      'feeds': [ 'shared_videos', 'shared_images' ],
