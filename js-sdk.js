@@ -19,6 +19,7 @@ var _jaycut = {
     __options: {
         'version': 2,
         'applet': 'login',
+        'loader': 'basicLoader',
         'chain': 'mixer',
         'chain_params': {},
         'embed_target': 'jaycut-editor',
@@ -98,6 +99,13 @@ var _jaycut = {
             this.__appUri += '/applets/' + this.__options['applet'] + '.xml';
             this.__appUri += '?chain=' + this.__options['chain'];
             this.__appUri += '&version=' + this.__options['version'];
+            this.__appUri += '&loader=' + this.__options['loader'];
+
+            // Let chained applet use same loader unless otherwise specified
+            if (this.__options['chain_params']['loader'] == null) {
+                this.__options['chain_params']['loader'] = this.__options['loader'];
+            }
+
             this.__appUri += build_chain_params(this.__options['chain_params']);
         }
 
