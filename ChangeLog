@@ -1,3 +1,5 @@
+0.4.2
+	* Changed how flashVars are treated.
 0.4.1
 	* JC.init now takes a configuration hash that enables tweaking of options for embedding
 
