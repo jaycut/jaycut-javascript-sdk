@@ -24,7 +24,9 @@ var _jaycut = {
         'chain_params': {},
         'embed_target': 'jaycut-editor',
         'embed_width': '100%',
-        'embed_height': '100%'
+        'embed_height': '100%',
+	'uri_authority': '',
+	'login_uri': ''
     },
     __flashvars: {},
     __flashparams: {
@@ -32,23 +34,6 @@ var _jaycut = {
         allowScriptAccess: 'always',
         allowFullScreen: 'true',
         bgcolor: '#000000'
-    },
-    __flashoptions: {
-        'noHelp': true,
-        'noUpload': true,
-        'noPublish': true,
-        'noFullscreen': true,
-        'noOpenSave': true,
-        'noWebcam': true,
-        'noMicrophone': true,
-        'noDrawings': true,
-        'mix': true,
-        'remix': true,
-        'redirectOnPublish': true,
-        'redirectWindow': true,
-        'requireMixName': true,
-        'locale': true,
-        'helpUri': true
     },
 
     subscribe: function(event_name, func) {
@@ -70,25 +55,18 @@ var _jaycut = {
         this.__appUri = uri;
     },
     init: function(options) {
-        var flashopts = Array();
-        for (var k in this.__flashoptions) {
-            flashopts[k] = k
-            flashopts[camelToUnderscore(k)] = k
-        }
-
-        if (options != null) {
-            for (var key in options) {
-                if (key == 'flashparams') {
-                    for (var k in options['flashparams']) {
-                        this.__flashparams[k] = options['flashparams'][k]
-                    }
-                } else if (flashopts[key] != null) {
-                    this.__flashvars[flashopts[key]] = options[key];
-                } else {
-                    this.__options[key] = options[key]
+	for (var key in options) {
+	    if (key == 'flashparams') {
+		for (var k in options['flashparams']) {
+                    this.__flashparams[k] = options['flashparams'][k]
                 }
-            }
-        }
+	    } else if (this.__options[key] != null) {
+		this.__options[key] = options[key];
+	    } else {
+		// pass this on as a flashVar, making sure it is camelCase
+		this.__flashvars[underscoreToCamel(key)] = options[key];
+	    }
+	}
 
         if (this.__loaderUri == null) {
             this.__loaderUri = 'http://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
@@ -140,9 +118,9 @@ function isString(obj) {
     return obj.constructor == String;
 }
 
-function camelToUnderscore(str){
-    return str.replace(/([A-Z])/g, function($1) { return "_" + $1.toLowerCase(); } );
-}
+function underscoreToCamel(str){
+    return str.replace(/(_[a-z])/g, function($1){return $1.toUpperCase().replace('_','');});
+};
 
 function build_chain_params(cp_hash) {
     var result = ''
