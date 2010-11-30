@@ -1,6 +1,23 @@
 h1. JayCut Mixer Javascript SDK
 
-This is the JavaScript SDK for including the JayCut Mixer on your web site. It is official, but it has not been in the wild for long - keep the feedback coming, please!
+This is the JavaScript SDK for including the JayCut Mixer on your web
+site. It is official, but it has not been in the wild for long - keep
+the feedback coming, please!
+
+h2. Access
+
+We recommend that you load the javascript from our servers specifying
+only the major version number, like this:
+
+* http://api.jaycut.com/assets/javascripts/sdk.0.4.js
+* http://api.jaycut.com/assets/javascripts/sdk.0.3.js
+
+These are actually aliases to the latest minor version of the
+specified major. This makes sure you get the latest bugfixes but you
+can rest assured that no backwards breaking functionality will be
+introduced.
+
+For complete info on all available versions, see the ChangeLog.
 
 h2. Usage
 
@@ -17,7 +34,7 @@ The below is a simple case of implementing the editor.
 
 <!-- Include the SDK, just before the closing </body> tag.-->
 
-<script src="http://api.jaycut.com/assets/javascripts/sdk.0.4.1.js" type="text/javascript"></script> 
+<script src="http://api.jaycut.com/assets/javascripts/sdk.0.4.js" type="text/javascript"></script> 
 <script type="text/javascript">
 
 var uri_authority = "cutedogsite.api.jaycut.com";
@@ -95,7 +112,7 @@ Here's an example of a more customized embedding of the editor
 
 <!-- Include the SDK, just before the closing </body> tag.-->
 
-<script src="http://api.jaycut.com/assets/javascripts/sdk.0.4.1.js" type="text/javascript"></script> 
+<script src="http://api.jaycut.com/assets/javascripts/sdk.0.4.js" type="text/javascript"></script> 
 <script type="text/javascript">
 
 var options = {
@@ -139,7 +156,7 @@ The editor triggers various events, that you can listen to via the JavaScript SD
 
 
 
-<script src="http://api.jaycut.com/assets/javascripts/sdk.0.3.1.js" type="text/javascript"></script> 
+<script src="http://api.jaycut.com/assets/javascripts/sdk.0.3.js" type="text/javascript"></script> 
 <script type="text/javascript">
 JC.subscribe('load_completed', function() {
 
