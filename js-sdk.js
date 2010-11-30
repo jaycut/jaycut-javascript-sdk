@@ -31,7 +31,7 @@ var _jaycut = {
         wmode: 'window',
         allowScriptAccess: 'always',
         allowFullScreen: 'true',
-        bgcolor: '#000000',
+        bgcolor: '#000000'
     },
     __flashoptions: {
         'noHelp': true,
