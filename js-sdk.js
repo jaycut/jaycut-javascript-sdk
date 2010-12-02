@@ -25,8 +25,10 @@ var _jaycut = {
         'embed_target': 'jaycut-editor',
         'embed_width': '100%',
         'embed_height': '100%',
-	'uri_authority': '',
-	'login_uri': ''
+        'uri_authority': '',
+        'login_uri': '',
+        'loader_uri': '',
+        'app_uri': ''
     },
     __flashvars: {},
     __flashparams: {
@@ -48,46 +50,40 @@ var _jaycut = {
                 return func();
         }
     },
-    overrideLoaderUri: function(uri) {
-        this.__loaderUri = uri;
-    },
-    overrideApplicationUri: function(uri) {
-        this.__appUri = uri;
-    },
     init: function(options) {
-	for (var key in options) {
-	    if (key == 'flashparams') {
-		for (var k in options['flashparams']) {
+        for (var key in options) {
+            if (key == 'flashparams') {
+                for (var k in options['flashparams']) {
                     this.__flashparams[k] = options['flashparams'][k]
                 }
-	    } else if (this.__options[key] != null) {
-		this.__options[key] = options[key];
-	    } else {
-		// pass this on as a flashVar, making sure it is camelCase
-		this.__flashvars[underscoreToCamel(key)] = options[key];
-	    }
-	}
-
-        if (this.__loaderUri == null) {
-            this.__loaderUri = 'http://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
+            } else if (this.__options[key] != null) {
+                this.__options[key] = options[key];
+            } else {
+                // pass this on as a flashVar, making sure it is camelCase
+                this.__flashvars[underscoreToCamel(key)] = options[key];
+            }
         }
 
-        if (this.__appUri == null) {
-            this.__appUri = 'http://' + this.__options['uri_authority'];
-            this.__appUri += '/applets/' + this.__options['applet'] + '.xml';
-            this.__appUri += '?chain=' + this.__options['chain'];
-            this.__appUri += '&version=' + this.__options['version'];
-            this.__appUri += '&loader=' + this.__options['loader'];
+        if (options['loader_uri'] == null) {
+            this.__options['loader_uri'] = 'http://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
+        }
+
+        if (options['app_uri'] == null) {
+            this.__options['app_uri'] = 'http://' + this.__options['uri_authority'];
+            this.__options['app_uri'] += '/applets/' + this.__options['applet'] + '.xml';
+            this.__options['app_uri'] += '?chain=' + this.__options['chain'];
+            this.__options['app_uri'] += '&version=' + this.__options['version'];
+            this.__options['app_uri'] += '&loader=' + this.__options['loader'];
 
             // Let chained applet use same loader unless otherwise specified
             if (this.__options['chain_params']['loader'] == null) {
                 this.__options['chain_params']['loader'] = this.__options['loader'];
             }
 
-            this.__appUri += build_chain_params(this.__options['chain_params']);
+            this.__options['app_uri'] += build_chain_params(this.__options['chain_params']);
         }
 
-        this.__flashvars.applicationUri = encodeURIComponent(this.__appUri);
+        this.__flashvars.applicationUri = encodeURIComponent(this.__options['app_uri']);
 
         if (this.__options['login_uri'] != null) {
             this.__flashvars.loginUri = encodeURIComponent(this.__options['login_uri']);
@@ -96,9 +92,9 @@ var _jaycut = {
         ensureSWFObjectScriptIsLoaded();
 
         __run_when_swfobject_available(function() {
-            swfobject.embedSWF(_jaycut.__loaderUri, _jaycut.__options['embed_target'],
+            swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
                                _jaycut.__options['embed_width'], _jaycut.__options['embed_height'], '9.0.0',
-                               _jaycut.__loaderUri, _jaycut.__flashvars, _jaycut.__flashparams);
+                               _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams);
         });
     }
 };
