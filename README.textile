@@ -146,18 +146,6 @@ h3. Events
 The editor triggers various events, that you can listen to via the JavaScript SDK. 
 
 <pre><code>
-<html>
-<head>
-	<title>Our video editor</title>
-</head>                                                        
-<body>
-
-<div id="jaycut-editor"></div>
-
-
-
-<script src="http://api.jaycut.com/assets/javascripts/sdk.0.3.js" type="text/javascript"></script> 
-<script type="text/javascript">
 JC.subscribe('load_completed', function() {
 
 	// event: load_completed
@@ -196,12 +184,6 @@ JC.subscribe('mix_published', function(data) {
         // NOTE: The mix has only been published, not necessarily finished rendering.
 	alert("An export has been created, and it has ID " + data.mix_id);                                
 });
-
-
-
-var authority = "mydogvideosite.api.jaycut.com"; 
-var login_uri = 'YOUR-LOGIN-URL-HERE'; // Login URI is generated server side.
-JC.init(authority, login_uri );
 </script>
 </body>
 </html>
