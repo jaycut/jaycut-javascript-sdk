@@ -75,8 +75,7 @@ var _jaycut = {
         if (this.__appUri == null) {
             this.__appUri = 'http://' + this.__options['uri_authority'];
             this.__appUri += '/applets/' + this.__options['applet'] + '.xml';
-            this.__appUri += '?chain=' + this.__options['chain'];
-            this.__appUri += '&version=' + this.__options['version'];
+            this.__appUri += '?version=' + this.__options['version'];
             this.__appUri += '&loader=' + this.__options['loader'];
 
             // Let chained applet use same loader unless otherwise specified
@@ -84,7 +83,10 @@ var _jaycut = {
                 this.__options['chain_params']['loader'] = this.__options['loader'];
             }
 
-            this.__appUri += build_chain_params(this.__options['chain_params']);
+	    if (this.__options['chain'] != false) {
+		this.__appUri += '&chain=' + this.__options['chain'];
+		this.__appUri += build_chain_params(this.__options['chain_params']);
+	    }
         }
 
         this.__flashvars.applicationUri = encodeURIComponent(this.__appUri);

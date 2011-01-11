@@ -1,3 +1,5 @@
+
+	* Enable disabling of chainloading
 0.4.2
 	* Changed how flashVars are treated.
 0.4.1
