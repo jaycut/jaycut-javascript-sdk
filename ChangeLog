@@ -1,6 +1,9 @@
+	* Enable disabling of chainloading	
+
 0.4.3
 	* Removed outdated examples
 	* app_uri and loader_uri are now treated as any other options.
+
 0.4.2
 	* Changed how flashVars are treated.
 0.4.1

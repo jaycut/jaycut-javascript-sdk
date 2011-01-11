@@ -79,7 +79,7 @@ from the mandatory uri_authority and login_uri.
 
 * @version@ - Set which version of the loaded applet to use. Default: 2
 * @applet@ - Which applet to load. Default 'login'
-* @chain@ - Which applet to chain load. Default 'mixer'
+* @chain@ - Which applet to chain load. Default 'mixer'. Set to false to disable chain loading.
 * @embed_target@ - Id of the html tag that will be replaced with the embedded object. Default 'jaycut-editor'
 * @embed_width@ - Width of the embedded flash object. Either absolute (e.g '800px') or relative ( e.g '100%'). Default '100%'
 * @embed_height@ - Height of the embedded flash object.
