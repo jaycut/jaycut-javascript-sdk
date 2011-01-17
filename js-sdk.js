@@ -14,8 +14,6 @@ function ensureSWFObjectScriptIsLoaded() {
 var _jaycut = {
 
     __event_handlers: {},
-    __loaderUri: null,
-    __appUri:  null,
     __options: {
         'version': 2,
         'applet': 'login',
@@ -68,21 +66,23 @@ var _jaycut = {
             this.__options['loader_uri'] = 'http://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
         }
 
-        if (this.__appUri == null) {
-            this.__appUri = 'http://' + this.__options['uri_authority'];
-            this.__appUri += '/applets/' + this.__options['applet'] + '.xml';
-            this.__appUri += '?version=' + this.__options['version'];
-            this.__appUri += '&loader=' + this.__options['loader'];
+        if (this.__options['app_uri'] == '') {
+            this.__options['app_uri'] = 'http://' + this.__options['uri_authority'];
+            this.__options['app_uri'] += '/applets/' + this.__options['applet'] + '.xml';
+            this.__options['app_uri'] += '?version=' + this.__options['version'];
+            this.__options['app_uri'] += '&loader=' + this.__options['loader'];
 
-            // Let chained applet use same loader unless otherwise specified
-            if (this.__options['chain_params']['loader'] == null) {
-                this.__options['chain_params']['loader'] = this.__options['loader'];
+
+            if (this.__options['chain'] != false) {
+                this.__options['app_uri'] += '&chain=' + this.__options['chain'];
+
+                // Let chained applet use same loader unless otherwise specified
+                if (this.__options['chain_params']['loader'] == null) {
+                    this.__options['chain_params']['loader'] = this.__options['loader'];
+                }
+
+                this.__options['app_uri'] += build_chain_params(this.__options['chain_params']);
             }
-
-	    if (this.__options['chain'] != false) {
-		this.__appUri += '&chain=' + this.__options['chain'];
-		this.__appUri += build_chain_params(this.__options['chain_params']);
-	    }
         }
 
         this.__flashvars.applicationUri = encodeURIComponent(this.__options['app_uri']);
