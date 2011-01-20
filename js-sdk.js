@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2011, JayCut AB
+ * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+ *
+ */
+
 function ensureSWFObjectScriptIsLoaded() {
     if (window.swfobject !== undefined) {
         // Already loaded on the calling domain, don't include twice.
