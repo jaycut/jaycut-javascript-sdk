@@ -1,3 +1,6 @@
+
+	* Construct uri_authority from sitename and api_host
+	* Optionally use sitename in path instead of subdomain
 0.4.4
 	* Enable disabling of chainloading
 

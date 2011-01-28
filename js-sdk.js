@@ -32,7 +32,10 @@ var _jaycut = {
         'uri_authority': '',
         'login_uri': '',
         'loader_uri': '',
-        'app_uri': ''
+        'app_uri': '',
+        'sitename': '',
+        'sitename_in_path': false,
+        'api_host': 'api.jaycut.com'
     },
     __flashvars: {},
     __flashparams: {
@@ -68,12 +71,24 @@ var _jaycut = {
             }
         }
 
+        // Build the uri_authority from sitename and api-host
+        if (options['uri_authority'] == null) {
+            this.__options['uri_authority'] = '';
+            if (!this.__options['sitename_in_path']) {
+                this.__options['uri_authority'] += this.__options['sitename'] + '.'
+            }
+            this.__options['uri_authority'] += this.__options['api_host'];
+        }
+
         if (options['loader_uri'] == null) {
             this.__options['loader_uri'] = 'http://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
         }
 
         if (this.__options['app_uri'] == '') {
             this.__options['app_uri'] = 'http://' + this.__options['uri_authority'];
+            if (this.__options['sitename_in_path']) {
+                this.__options['app_uri'] += '/sites/' + this.__options['sitename'];
+            }
             this.__options['app_uri'] += '/applets/' + this.__options['applet'] + '.xml';
             this.__options['app_uri'] += '?version=' + this.__options['version'];
             this.__options['app_uri'] += '&loader=' + this.__options['loader'];
