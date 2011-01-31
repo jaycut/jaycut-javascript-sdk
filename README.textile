@@ -64,7 +64,7 @@ h3. Options
 Since version 0.4.1 the JC.init call takes a hash as only
 argument. This hash may contain all configuration data needed.
 
-* @sitename@ - The name you picked when
+* @sitename@ - The name you picked when you signed up for the API.
 * @login_uri@ - Required by the 'login' applet. The applet will
   perform a POST to this url. The idea is that the request will create
   an authenticated session in the users browser.
