@@ -182,6 +182,13 @@ JC.subscribe('mix_published', function(data) {
         // NOTE: The mix has only been published, not necessarily finished rendering.
         alert("An export has been created, and it has ID " + data.mix_id);
 });
+JC.subscribe('add_media_source_selected', function(data) {
+
+        // event: add_media_source_selected
+        // This is fired when a user clicks the add media button and selects a media source (either by selecting in and clicking next, or double-clicking it)
+        // event_data: media_source_id (string - can be either 'local', 'cam', 'mic' or the id of your Custom Media Source, if you have added one.
+        alert('The user wants to add media via ' + data.media_source_id);
+});
 </script>
 </body>
 </html>
