@@ -61,7 +61,7 @@ JC.init(options)
 </code></pre>
 h3. Options
 
-Since version 0.4.1 the JC.init call takes a hash as only
+Since version 0.4.1 the JC.init call takes a JSON object as the single and only
 argument. This hash may contain all configuration data needed.
 
 * @sitename@ - The name you picked when you signed up for the API.
