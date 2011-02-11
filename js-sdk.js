@@ -91,7 +91,7 @@ var _jaycut = {
             }
             this.__options['app_uri'] += '/applets/' + this.__options['applet'] + '.xml';
             this.__options['app_uri'] += '?version=' + this.__options['version'];
-            this.__options['app_uri'] += '&loader=' + this.__options['loader'];
+            this.__options['app_uri'] += '&loader=' + encodeURIComponent(this.__options['loader']);
 
 
             if (this.__options['chain'] != false) {
