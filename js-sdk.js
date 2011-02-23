@@ -32,8 +32,8 @@ var _jaycut = {
       'bgcolor': '#000000'  
     },
     __flashparams: {
-        id: __options['embed_target'], // What ID the SWF is given
-        name: __options['embed_target'],
+        id: 'bajs', // What ID the SWF is given
+        name: 'bajs',
         wmode: 'window',
         allowScriptAccess: 'always',
         allowNetworking: 'all',
