@@ -16,7 +16,7 @@ var _jaycut = {
     'loader': 'basicLoader',
     'chain': 'mixer',
     'chain_params': {},
-    'embed_target': 'jaycut-editor', // Target HTML element ID
+    'embed_target': 'jaycutEditor', // Target HTML element ID
     'embed_width': '100%',
     'embed_height': '100%',
     'uri_authority': '',
