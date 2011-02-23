@@ -4,29 +4,19 @@
  *
  */
 
-function ensureSWFObjectScriptIsLoaded() {
-    if (window.swfobject !== undefined) {
-        // Already loaded on the calling domain, don't include twice.
-        return;
-    }
-    var head = document.getElementsByTagName("head")[0];
-    script = document.createElement('script');
-    script.id = 'swfObjectScript';
-    script.type = 'text/javascript';
-    script.src = "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js";
-    head.appendChild(script);
-}
+
 
 var _jaycut = {
 
     __event_handlers: {},
     __options: {
-        'version': 2,
+		// Set default values...
+        'version': 2, // Use version 2 as default, 1 is deprecated.
         'applet': 'login',
         'loader': 'basicLoader',
         'chain': 'mixer',
         'chain_params': {},
-        'embed_target': 'jaycut-editor',
+        'embed_target': 'jaycut-editor', // Target HTML element ID
         'embed_width': '100%',
         'embed_height': '100%',
         'uri_authority': '',
@@ -35,19 +25,22 @@ var _jaycut = {
         'app_uri': '',
         'sitename': '',
         'sitename_in_path': false,
-        'api_host': 'api.jaycut.com'
+        'api_host': 'api.jaycut.com',
+		'bgcolor': '#000000'
     },
+
     __flashvars: {},
     __flashparams: {
+		id: '__jayCutMixer', // What ID the SWF is given
         wmode: 'window',
         allowScriptAccess: 'always',
-        allowFullScreen: 'true',
-        bgcolor: '#000000'
+        allowFullScreen: 'true'
     },
 
     subscribe: function(event_name, func) {
         this.__event_handlers[event_name] = func;
     },
+
     trigger: function(event_name, data) {
         var func = this.__event_handlers[event_name];
         if (func != null) {
@@ -57,6 +50,7 @@ var _jaycut = {
                 return func();
         }
     },
+
     init: function(options) {
         for (var key in options) {
             if (key == 'flashparams') {
@@ -64,6 +58,12 @@ var _jaycut = {
                     this.__flashparams[k] = options['flashparams'][k]
                 }
             } else if (this.__options[key] != null) {
+
+				// Transfer BG color of main options to flashparams, if not already set. 
+				if (key == 'bgcolor' && this.__flashparams['bgcolor'] != null)
+					this.__flashparams['bgcolor'] == options['bgcolor'];   
+					
+				
                 this.__options[key] = options[key];
             } else {
                 // pass this on as a flashVar, making sure it is camelCase
@@ -112,16 +112,54 @@ var _jaycut = {
             this.__flashvars.loginUri = encodeURIComponent(this.__options['login_uri']);
         }
 
-        ensureSWFObjectScriptIsLoaded();
+        __ensureSWFObjectScriptIsLoaded();
 
         __run_when_swfobject_available(function() {
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
                                _jaycut.__options['embed_width'], _jaycut.__options['embed_height'], '9.0.0',
                                _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams);
         });
-    }
+    },
+	
+	/**
+	 * @returns A boolean indicating whether or not it's in full-screen mode at the moment.      
+	 */
+	isFullscreen: function() {
+   		return __jayCutMixer.isFullScreen();
+	},
+	
+	/**
+     * Toggles the mixer between full-screen and standard mode.
+	 **/
+	toggleFullscreen: function() {
+    	__jayCutMixer.toggleFullscreen();
+	}
 };
 
+/**
+ * Includes SWFObject if it's not already loaded on the page.
+ **/
+function __ensureSWFObjectScriptIsLoaded() {
+    if (window.swfobject !== undefined) {
+        // Already loaded on the calling domain, don't include twice.
+        return;
+    }
+    var head = document.getElementsByTagName("head")[0];
+    script = document.createElement('script');
+    script.id = 'swfObjectScript';
+    script.type = 'text/javascript';
+    script.src = "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js";
+    head.appendChild(script);
+}                     
+
+/**
+ * Patiently waits until SWFObject is loaded,
+ * then calls the passed function func. Make sure you call
+ * __ensureSWFObjectScriptIsLoaded before calling this!
+ * 
+ * @func The closure to call when SWFObject is loaded. 
+ * 
+ **/
 var __run_when_swfobject_available = function(func) {
     if (window.swfobject !== undefined)
         func();
