@@ -128,16 +128,24 @@ var _jaycut = {
      * @returns A boolean indicating whether or not it's in full-screen mode at the moment.      
      */
     isFullscreen: function() {
-      return __jayCutMixer.isFullScreen();
+      return __flashElement.isFullScreen();
     },
     
     /**
      * Toggles the mixer between full-screen and standard mode.
      **/
     toggleFullscreen: function() {
-      __jayCutMixer.toggleFullscreen();
+      __flashElement.toggleFullscreen();
     }
 };
+
+/**
+  * Returns the actual flash element (the SWF). Mainly used to call 
+    methods in Flex.
+  */
+function __flashElement() {
+  return document.getElementById(__options['embed_target']);  
+}
 
 /**
  * Includes SWFObject if it's not already loaded on the page.
