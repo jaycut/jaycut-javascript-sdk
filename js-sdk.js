@@ -128,14 +128,14 @@ var _jaycut = {
      * @returns A boolean indicating whether or not it's in full-screen mode at the moment.      
      */
     isFullscreen: function() {
-      return __flashElement.isFullScreen();
+      return __flashElement().isFullScreen();
     },
     
     /**
      * Toggles the mixer between full-screen and standard mode.
      **/
     toggleFullscreen: function() {
-      __flashElement.toggleFullscreen();
+      __flashElement().toggleFullscreen();
     }
 };
 
