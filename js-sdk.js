@@ -61,7 +61,7 @@ var _jaycut = {
 
                 // Transfer BG color of main options to flashparams, if not already set. 
                 if (key == 'bgcolor' && this.__flashparams['bgcolor'] == null)
-                  this.__flashparams['bgcolor'] == options['bgcolor'];   
+                  this.__flashparams['bgcolor'] = options['bgcolor'];   
 
                 this.__options[key] = options[key];
             } else {
