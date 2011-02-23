@@ -144,7 +144,7 @@ var _jaycut = {
     methods in Flex.
   */
 function __flashElement() {
-  return document.getElementById(__options['embed_target']);  
+  return document.getElementById(_jaycut.__options['embed_target']);  
 }
 
 /**
