@@ -10,7 +10,7 @@ var _jaycut = {
 
   __event_handlers: {},
   __options: {
-    // Set default values...
+    // Options that are non-flashvars, non-flash parameters, and their default values.
     'version': 2, // Use version 2 as default, 1 is deprecated.
     'applet': 'login',
     'loader': 'basicLoader',
@@ -25,11 +25,12 @@ var _jaycut = {
     'app_uri': '',
     'sitename': '',
     'sitename_in_path': false,
-    'api_host': 'api.jaycut.com',
-    'bgcolor': '#000000'
+    'api_host': 'api.jaycut.com'
   },
 
-    __flashvars: {},
+    __flashvars: {
+      'bgcolor': '#000000'  
+    },
     __flashparams: {
         id: '__jayCutMixer', // What ID the SWF is given
         wmode: 'window',
@@ -58,17 +59,20 @@ var _jaycut = {
                     this.__flashparams[k] = options['flashparams'][k]
                 }
             } else if (this.__options[key] != null) {
-
-                // Transfer BG color of main options to flashparams, if not already set. 
-                if (key == 'bgcolor' && this.__flashparams['bgcolor'] == null)
-                  this.__flashparams['bgcolor'] = options['bgcolor'];   
-
+                // If it's part of the existing options, it's not a flashvar, just set it.
                 this.__options[key] = options[key];
             } else {
+                // If it's not in __options, it's considered a flashvar.
+              
                 // pass this on as a flashVar, making sure it is camelCase
                 this.__flashvars[underscoreToCamel(key)] = options[key];
             }      
         }
+        
+        // If no bgcolor set via flashparams, use from flashvars.
+        if (this.__flashparams['bgcolor'] == null)
+          this.__flashparams['bgcolor'] = this.__flashvars['bgcolor'];      
+                                                                            
 
         // Build the uri_authority from sitename and api-host
         if (options['uri_authority'] == null) {
