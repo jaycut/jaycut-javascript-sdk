@@ -35,6 +35,7 @@ var _jaycut = {
         id: '__jayCutMixer', // What ID the SWF is given
         wmode: 'window',
         allowScriptAccess: 'always',
+        allowNetworking: 'all',
         allowFullScreen: 'true'
     },
 
