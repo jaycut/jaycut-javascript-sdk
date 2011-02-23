@@ -8,30 +8,30 @@
 
 var _jaycut = {
 
-    __event_handlers: {},
-    __options: {
-		// Set default values...
-        'version': 2, // Use version 2 as default, 1 is deprecated.
-        'applet': 'login',
-        'loader': 'basicLoader',
-        'chain': 'mixer',
-        'chain_params': {},
-        'embed_target': 'jaycut-editor', // Target HTML element ID
-        'embed_width': '100%',
-        'embed_height': '100%',
-        'uri_authority': '',
-        'login_uri': '',
-        'loader_uri': '',
-        'app_uri': '',
-        'sitename': '',
-        'sitename_in_path': false,
-        'api_host': 'api.jaycut.com',
-		'bgcolor': '#000000'
-    },
+  __event_handlers: {},
+  __options: {
+    // Set default values...
+    'version': 2, // Use version 2 as default, 1 is deprecated.
+    'applet': 'login',
+    'loader': 'basicLoader',
+    'chain': 'mixer',
+    'chain_params': {},
+    'embed_target': 'jaycut-editor', // Target HTML element ID
+    'embed_width': '100%',
+    'embed_height': '100%',
+    'uri_authority': '',
+    'login_uri': '',
+    'loader_uri': '',
+    'app_uri': '',
+    'sitename': '',
+    'sitename_in_path': false,
+    'api_host': 'api.jaycut.com',
+    'bgcolor': '#000000'
+  },
 
     __flashvars: {},
     __flashparams: {
-		id: '__jayCutMixer', // What ID the SWF is given
+        id: '__jayCutMixer', // What ID the SWF is given
         wmode: 'window',
         allowScriptAccess: 'always',
         allowFullScreen: 'true'
@@ -59,16 +59,15 @@ var _jaycut = {
                 }
             } else if (this.__options[key] != null) {
 
-				// Transfer BG color of main options to flashparams, if not already set. 
-				if (key == 'bgcolor' && this.__flashparams['bgcolor'] != null)
-					this.__flashparams['bgcolor'] == options['bgcolor'];   
-					
-				
+                // Transfer BG color of main options to flashparams, if not already set. 
+                if (key == 'bgcolor' && this.__flashparams['bgcolor'] == null)
+                  this.__flashparams['bgcolor'] == options['bgcolor'];   
+
                 this.__options[key] = options[key];
             } else {
                 // pass this on as a flashVar, making sure it is camelCase
                 this.__flashvars[underscoreToCamel(key)] = options[key];
-            }
+            }      
         }
 
         // Build the uri_authority from sitename and api-host
@@ -120,20 +119,20 @@ var _jaycut = {
                                _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams);
         });
     },
-	
-	/**
-	 * @returns A boolean indicating whether or not it's in full-screen mode at the moment.      
-	 */
-	isFullscreen: function() {
-   		return __jayCutMixer.isFullScreen();
-	},
-	
-	/**
+
+    /**
+     * @returns A boolean indicating whether or not it's in full-screen mode at the moment.      
+     */
+    isFullscreen: function() {
+      return __jayCutMixer.isFullScreen();
+    },
+    
+    /**
      * Toggles the mixer between full-screen and standard mode.
-	 **/
-	toggleFullscreen: function() {
-    	__jayCutMixer.toggleFullscreen();
-	}
+     **/
+    toggleFullscreen: function() {
+      __jayCutMixer.toggleFullscreen();
+    }
 };
 
 /**
