@@ -16,7 +16,7 @@ var _jaycut = {
     'loader': 'basicLoader',
     'chain': 'mixer',
     'chain_params': {},
-    'embed_target': 'jaycutEditor', // Target HTML element ID
+    'embed_target': 'jayCutEditor', // Target HTML element ID
     'embed_width': '100%',
     'embed_height': '100%',
     'uri_authority': '',
@@ -32,7 +32,8 @@ var _jaycut = {
       'bgcolor': '#000000'  
     },
     __flashparams: {
-        id: '__jayCutMixer', // What ID the SWF is given
+        id: __options['embed_target'], // What ID the SWF is given
+        name: __options['embed_target'],
         wmode: 'window',
         allowScriptAccess: 'always',
         allowNetworking: 'all',
