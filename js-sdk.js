@@ -32,8 +32,7 @@ var _jaycut = {
       'bgcolor': '#000000'  
     },
     __flashparams: {
-        id: 'bajs', // What ID the SWF is given
-        name: 'bajs',
+        id: 'jayCutEditorFlash', // What ID the SWF is given
         wmode: 'window',
         allowScriptAccess: 'always',
         allowNetworking: 'all',
@@ -146,7 +145,7 @@ var _jaycut = {
     methods in Flex.
   */
 function __flashElement() {
-  return document.getElementById(_jaycut.__options['embed_target']);  
+  return document.getElementById('jayCutEditorFlash');  
 }
 
 /**
