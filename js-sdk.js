@@ -32,7 +32,6 @@ var _jaycut = {
       'bgcolor': '#000000'  
     },
     __flashparams: {
-        id: 'jayCutEditorFlash', // What ID the SWF is given
         wmode: 'window',
         allowScriptAccess: 'always',
         allowNetworking: 'all',
@@ -121,7 +120,9 @@ var _jaycut = {
         __run_when_swfobject_available(function() {
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
                                _jaycut.__options['embed_width'], _jaycut.__options['embed_height'], '9.0.0',
-                               _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams);
+                               _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams, 
+							   { id: 'jayCutEditorFlash'}   // What ID the SWF is given     
+							   );
         });
     },
 
