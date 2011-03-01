@@ -195,6 +195,12 @@ JC.subscribe('add_media_source_selected', function(data) {
 
 </code></pre>
 
+h3. Methods
+
+Methods that you can call on the JC object to alter the behaviour of the Mixer.
+
+JC.leaveFullscreen()
+If the editor is in fullscreen mode, force it to leave it. This is useful when you want to place layers over the editor, but that would be covered by the full screen mode.
 
 h3. SWFObject from your own domain
 
