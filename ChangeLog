@@ -1,4 +1,12 @@
+0.4.7
+	* revert change of embed_target default value in 0.4.6
 
+0.4.6
+	* bgcolor param, moved from flashparams
+	* Support toggle fullscreen
+	* Added urlencoding to loader parameter. 
+
+0.4.5
 	* Construct uri_authority from sitename and api_host
 	* Optionally use sitename in path instead of subdomain
 0.4.4
