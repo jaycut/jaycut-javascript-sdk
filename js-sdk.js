@@ -120,8 +120,7 @@ var _jaycut = {
         __run_when_swfobject_available(function() {
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
                                _jaycut.__options['embed_width'], _jaycut.__options['embed_height'], '9.0.0',
-                               _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams, 
-							   { id: 'jcswf'}   // What ID the SWF is given     
+                               _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams
 							   );
         });
     },
@@ -130,17 +129,19 @@ var _jaycut = {
      * Forces the mixer out of any fullscreen mode.
      **/
     leaveFullscreen: function() {
-      __flashElement().leaveFullscreen();
-    }
+      _jaycut.__flashElement().leaveFullscreen();
+    },
+    
+    /**
+	  * Returns the actual flash element (the SWF). Mainly used to call 
+	  * methods in Flex from JS.
+	  */
+	__flashElement: function() {
+	  return document.getElementById(_jaycut.__options.embed_target);  
+	}
 };
 
-/**
-  * Returns the actual flash element (the SWF). Mainly used to call 
-    methods in Flex from JS.
-  */
-function __flashElement() {
-  return document.getElementById('jcswf');  
-}
+
 
 /**
  * Includes SWFObject if it's not already loaded on the page.
