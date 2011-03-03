@@ -242,7 +242,7 @@ function hash_to_querystring(hash) {
 function __query_parts(x, root) {
     if (x == null) {
         return [''];
-    } else if (isString(x)) {
+    } else if (isString(x) || typeof(x) == 'number') {
         return ['=' + x]
     } else if (isArray(x)) {
         var res = new Array()
