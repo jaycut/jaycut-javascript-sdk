@@ -145,7 +145,7 @@ var _jaycut = {
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
                                _jaycut.__options['embed_width'], _jaycut.__options['embed_height'], '9.0.0',
                                _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams
-							   );
+                                                           );
         });
     },
 
@@ -157,12 +157,12 @@ var _jaycut = {
     },
 
     /**
-	  * Returns the actual flash element (the SWF). Mainly used to call
-	  * methods in Flex from JS.
-	  */
-	__flashElement: function() {
-	  return document.getElementById(_jaycut.__options.embed_target);
-	}
+          * Returns the actual flash element (the SWF). Mainly used to call
+          * methods in Flex from JS.
+          */
+        __flashElement: function() {
+          return document.getElementById(_jaycut.__options.embed_target);
+        }
 };
 
 
