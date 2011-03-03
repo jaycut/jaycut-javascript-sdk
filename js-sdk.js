@@ -29,7 +29,7 @@ var _jaycut = {
   },
 
     __flashvars: {
-      'bgcolor': '#000000'  
+      'bgcolor': '#000000'
     },
     __flashparams: {
         wmode: 'window',
@@ -43,7 +43,7 @@ var _jaycut = {
         options['applet'] = 'login';
         options['chain'] = 'mixer';
 
-        // feeds, filter and styles are parameters to the mixer 
+        // feeds, filter and styles are parameters to the mixer
         // applet so they need to move into chain_params
         var cps = ['feeds', 'filter', 'styles']
         for (var i = 0; i < cps.length; i++) {
@@ -87,16 +87,16 @@ var _jaycut = {
                 this.__options[key] = options[key];
             } else {
                 // If it's not in __options, it's considered a flashvar.
-              
+
                 // pass this on as a flashVar, making sure it is camelCase
                 this.__flashvars[underscoreToCamel(key)] = options[key];
-            }      
+            }
         }
-        
+
         // If no bgcolor set via flashparams, use from flashvars.
         if (this.__flashparams['bgcolor'] == null)
-          this.__flashparams['bgcolor'] = this.__flashvars['bgcolor'];      
-                                                                            
+          this.__flashparams['bgcolor'] = this.__flashvars['bgcolor'];
+
 
         // Build the uri_authority from sitename and api-host
         if (options['uri_authority'] == null) {
@@ -155,13 +155,13 @@ var _jaycut = {
     leaveFullscreen: function() {
       _jaycut.__flashElement().leaveFullscreen();
     },
-    
+
     /**
-	  * Returns the actual flash element (the SWF). Mainly used to call 
+	  * Returns the actual flash element (the SWF). Mainly used to call
 	  * methods in Flex from JS.
 	  */
 	__flashElement: function() {
-	  return document.getElementById(_jaycut.__options.embed_target);  
+	  return document.getElementById(_jaycut.__options.embed_target);
 	}
 };
 
@@ -181,15 +181,15 @@ function __ensureSWFObjectScriptIsLoaded() {
     script.type = 'text/javascript';
     script.src = "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js";
     head.appendChild(script);
-}                     
+}
 
 /**
  * Patiently waits until SWFObject is loaded,
  * then calls the passed function func. Make sure you call
  * __ensureSWFObjectScriptIsLoaded before calling this!
- * 
- * @func The closure to call when SWFObject is loaded. 
- * 
+ *
+ * @func The closure to call when SWFObject is loaded.
+ *
  **/
 var __run_when_swfobject_available = function(func) {
     if (window.swfobject !== undefined)
