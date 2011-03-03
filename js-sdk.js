@@ -226,12 +226,12 @@ var _jaycut = {
     },
 
     /**
-          * Returns the actual flash element (the SWF). Mainly used to call
-          * methods in Flex from JS.
-          */
-        __flashElement: function() {
-          return document.getElementById(_jaycut.__options.embed_target);
-        }
+     * Returns the actual flash element (the SWF). Mainly used to call
+     * methods in Flex from JS.
+     */
+    __flashElement: function() {
+        return document.getElementById(_jaycut.__options.embed_target);
+    }
 };
 
 
