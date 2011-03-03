@@ -40,43 +40,68 @@ var _jaycut = {
 
     embed_mixer: function(options) {
 
-        options['applet'] = 'login';
-        options['chain'] = 'mixer';
+        var p_target;
 
-        // feeds, filter and styles are parameters to the mixer
-        // applet so they need to move into chain_params
-        var cps = ['feeds', 'filter', 'styles']
-        for (var i = 0; i < cps.length; i++) {
-            if (options[cps[i]] != null) {
-                // init chain_params if neccessary
-                if (options['chain_params'] == null) {
-                    options['chain_params'] = {};
-                }
-
-                // Move the value into chain_params
-                options['chain_params'][cps[i]] = options[cps[i]];
-                delete options[cps[i]];
-            }
+        if (options['login_uri'] == null) {
+            options['applet'] = 'mixer';
+            options['chain'] = false;
+            p_target = 'applet_params';
+        } else {
+            options['applet'] = 'login';
+            options['chain'] = 'mixer';
+            p_target = 'chain_params';
         }
 
+        // feeds, filter and styles are parameters to the mixer
+        // applet so they need to move either into chain_params
+        // or applet_params.
+        this.__move_keys(options, ['feeds', 'filter', 'styles'], p_target)
+
+        // Now we're all set to call init
         this.init(options);
     },
 
     embed_uploader: function(options) {
 
-        options['applet'] = 'login';
-        options['chain'] = 'uploader';
+        var p_target;
+
+        if (options['login_uri'] == null) {
+            options['applet'] = 'uploader';
+            options['chain'] = false;
+            p_target = 'applet_params';
+        } else {
+            options['applet'] = 'login';
+            options['chain'] = 'uploader';
+            p_target = 'chain_params';
+        }
+
+        this.__move_keys(options, ['styles'], p_target);
+
         options['embed_width'] = '735px';
         options['embed_height'] = '320px';
+
         this.init(options);
     },
 
     embed_recorder: function(options) {
 
-        options['applet'] = 'login';
-        options['chain'] = 'recorder';
+        var p_target;
+
+        if (options['login_uri'] == null) {
+            options['applet'] = 'recorder';
+            options['chain'] = false;
+            p_target = 'applet_params';
+        } else {
+            options['applet'] = 'login';
+            options['chain'] = 'recorder';
+            p_target = 'chain_params';
+        }
+
+        this.__move_keys(options, ['styles'], p_target);
+
         options['embed_width'] = '735px';
         options['embed_height'] = '320px';
+
         this.init(options);
     },
 
@@ -103,6 +128,9 @@ var _jaycut = {
             } else if (this.__options[key] != null) {
                 // If it's part of the existing options, it's not a flashvar, just set it.
                 this.__options[key] = options[key];
+            } else if (key == 'applet_params') {
+                //these are parameters that should be added to app_uri
+                //leave them alone.
             } else {
                 // If it's not in __options, it's considered a flashvar.
 
@@ -138,6 +166,11 @@ var _jaycut = {
             this.__options['app_uri'] += '?version=' + this.__options['version'];
             this.__options['app_uri'] += '&loader=' + encodeURIComponent(this.__options['loader']);
 
+            //Add any explicitly stated query parameters to app_uri
+            var extra_params = hash_to_querystring(options['applet_params']);
+            if (extra_params != "") {
+                this.__options['app_uri'] += '&' + extra_params
+            }
 
             if (this.__options['chain'] != false) {
                 this.__options['app_uri'] += '&chain=' + this.__options['chain'];
@@ -172,6 +205,24 @@ var _jaycut = {
      **/
     leaveFullscreen: function() {
       _jaycut.__flashElement().leaveFullscreen();
+    },
+
+    /**
+     * Restructure hash by making the specified keys
+     *  subkeys to new_parent
+     **/
+    __move_keys: function(hash, keys, new_parent) {
+        for (var i=0; i < keys.length; i++) {
+            if (hash[keys[i]] != null) {
+                // initialize the new parent if it's missing
+                if (hash[new_parent] == null)
+                    hash[new_parent] = {};
+
+                // move the value into the new position
+                hash[new_parent][keys[i]] = hash[keys[i]]
+                delete hash[keys[i]]
+            }
+        }
     },
 
     /**
