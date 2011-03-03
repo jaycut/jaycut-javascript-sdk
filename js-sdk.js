@@ -147,7 +147,7 @@ var _jaycut = {
                     this.__options['chain_params']['loader'] = this.__options['loader'];
                 }
 
-                this.__options['app_uri'] += build_chain_params(this.__options['chain_params']);
+                this.__options['app_uri'] += '&' + hash_to_querystring({ 'chain_params': this.__options['chain_params'] });
             }
         }
 
@@ -228,22 +228,26 @@ function underscoreToCamel(str){
     return str.replace(/(_[a-z])/g, function($1){return $1.toUpperCase().replace('_','');});
 };
 
-function build_chain_params(cp_hash) {
-    var result = ''
-    var parts = __bcps(cp_hash);
-    for (var i in parts) {
-        result += '&chain_params' + parts[i]
+function hash_to_querystring(hash) {
+    var parts = __query_parts(hash, true);
+
+    var result = parts[0];
+
+    for (var i=1; i < parts.length; i++) {
+        result += '&' + parts[i];
     }
     return result;
 }
 
-function __bcps(x) {
-    if (isString(x)) {
+function __query_parts(x, root) {
+    if (x == null) {
+        return [''];
+    } else if (isString(x)) {
         return ['=' + x]
     } else if (isArray(x)) {
         var res = new Array()
         for (var elem in x) {
-            var parts = __bcps(x[elem])
+            var parts = __query_parts(x[elem], false)
             for (var part in parts) {
                 res.push('[]' + parts[part]);
             }
@@ -252,9 +256,13 @@ function __bcps(x) {
     } else {
         var res = new Array()
         for (var key in x) {
-            var parts = __bcps(x[key])
+            var parts = __query_parts(x[key], false)
             for (var part in parts) {
-                res.push('[' + key + ']' + parts[part]);
+                if ( !root) {
+                    res.push('[' + key + ']' + parts[part]);
+                } else {
+                    res.push(key + parts[part]);
+                }
             }
         }
         return res;
