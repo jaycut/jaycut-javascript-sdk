@@ -51,7 +51,7 @@ var options = {
   'login_uri': login_uri
 }
 
-JC.init(options)
+JC.embed_mixer(options)
 
 
 </script>
@@ -122,17 +122,15 @@ var options = {
   'no_webcam': true,
   'embed_target': 'editor-goes-here',
   'resetPreviewOnDelete': false,
-  'chain_params': {
-     'feeds': [ 'shared_videos', 'shared_images' ],
-     'filter': { 'shared_videos': { 'category_id': '5' } }
-  },
+  'feeds': [ 'shared_videos', 'shared_images' ],
+  'filter': { 'shared_videos': { 'category_id': '5' } },
   'flashparams': {
      'bgcolor': '#ffffff',
      'wmode': 'transparent'
   }
 }
 
-JC.init(options)
+JC.embed_mixer(options)
 
 </script>
 </body>
