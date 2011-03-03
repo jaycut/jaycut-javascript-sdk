@@ -38,6 +38,30 @@ var _jaycut = {
         allowFullScreen: 'true'
     },
 
+    embed_mixer: function(options) {
+
+        options['applet'] = 'login';
+        options['chain'] = 'mixer';
+
+        // feeds, filter and styles are parameters to the mixer 
+        // applet so they need to move into chain_params
+        var cps = ['feeds', 'filter', 'styles']
+        for (var i = 0; i < cps.length; i++) {
+            if (options[cps[i]] != null) {
+                // init chain_params if neccessary
+                if (options['chain_params'] == null) {
+                    options['chain_params'] = {};
+                }
+
+                // Move the value into chain_params
+                options['chain_params'][cps[i]] = options[cps[i]];
+                delete options[cps[i]];
+            }
+        }
+
+        this.init(options);
+    },
+
     subscribe: function(event_name, func) {
         this.__event_handlers[event_name] = func;
     },
