@@ -62,6 +62,24 @@ var _jaycut = {
         this.init(options);
     },
 
+    embed_uploader: function(options) {
+
+        options['applet'] = 'login';
+        options['chain'] = 'uploader';
+        options['embed_width'] = '735px';
+        options['embed_height'] = '320px';
+        this.init(options);
+    },
+
+    embed_recorder: function(options) {
+
+        options['applet'] = 'login';
+        options['chain'] = 'recorder';
+        options['embed_width'] = '735px';
+        options['embed_height'] = '320px';
+        this.init(options);
+    },
+
     subscribe: function(event_name, func) {
         this.__event_handlers[event_name] = func;
     },
