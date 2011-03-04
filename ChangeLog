@@ -1,3 +1,6 @@
+0.4.8
+	* added embed_mixer, embed_uploader and embed_recorder methods
+
 0.4.7
 	* revert change of embed_target default value in 0.4.6
 
