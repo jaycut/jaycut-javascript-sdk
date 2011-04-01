@@ -125,6 +125,8 @@ var options = {
   'feeds': [ 'shared_videos', 'shared_images' ],
   'filter': { 'shared_videos': { 'category_id': '5' } },
   'flashparams': {
+     // Note that flashPARAMS are different from flashVARS. Flashparams are strict properties
+     // for the Flash embed itself (such as wmode), while flashVars (such as no_microphone) are for the JayCut editor. 
      'bgcolor': '#ffffff',
      'wmode': 'transparent'
   }
