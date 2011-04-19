@@ -1,3 +1,7 @@
+0.4.9
+	* Fixed problem with bad query string builds due to other js
+	libraries injecting properties into Array
+
 0.4.8
 	* added embed_mixer, embed_uploader and embed_recorder methods
 
