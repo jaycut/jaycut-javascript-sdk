@@ -297,10 +297,10 @@ function __query_parts(x, root) {
         return ['=' + x]
     } else if (isArray(x)) {
         var res = new Array()
-        for (var elem in x) {
-            var parts = __query_parts(x[elem], false)
-            for (var part in parts) {
-                res.push('[]' + parts[part]);
+        for (var i = 0; i < x.length; i++) {
+            var parts = __query_parts(x[i], false)
+            for (var j = 0; j < parts.length; j++) {
+                res.push('[]' + parts[j]);
             }
         }
         return res;
@@ -308,11 +308,11 @@ function __query_parts(x, root) {
         var res = new Array()
         for (var key in x) {
             var parts = __query_parts(x[key], false)
-            for (var part in parts) {
+            for (var i = 0; i < parts.length; i++) {
                 if ( !root) {
-                    res.push('[' + key + ']' + parts[part]);
+                    res.push('[' + key + ']' + parts[i]);
                 } else {
-                    res.push(key + parts[part]);
+                    res.push(key + parts[i]);
                 }
             }
         }
