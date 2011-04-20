@@ -24,7 +24,30 @@ The below is a simple case of implementing the editor.
 <pre><code>
 <html>
 <head>
-        <title>Our video editor</title>
+<title>Our video editor</title>
+
+<!-- These css rules are necessary for embedding with 100% height in some browsers -->
+<!-- Thanks to Geoff Stearns. http://blog.deconcept.com/2005/01/02/100-height-and-100-width-xhtml-flash-embed/ -->
+
+<style type="text/css">
+/* hide from ie on mac \*/
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+#jaycut-editor {
+  height: 100%;
+}
+/* end hide */
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+</style>
+
 </head>
 <body>
 <!-- This is where the editor will be inserted, you can place it anywhere you need it.  -->
@@ -121,6 +144,8 @@ var options = {
   'no_microphone': true,
   'no_webcam': true,
   'embed_target': 'editor-goes-here',
+  'embed_width': '900px',
+  'embed_height': '700px',
   'resetPreviewOnDelete': false,
   'feeds': [ 'shared_videos', 'shared_images' ],
   'filter': { 'shared_videos': { 'category_id': '5' } },
