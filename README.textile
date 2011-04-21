@@ -76,6 +76,7 @@ argument. This hash may contain all configuration data needed.
   Either absolute (e.g '800px')
   or relative ( e.g '100%'). Default '100%'
 * @embed_height@ - Height of the embedded flash object.
+* @use_ssl@ - Set to true to make all requests over https. Default false.
 * @chain_params@ - Parameters to the chain-loaded applet as a hash. Default '{}'
 * @flash_params@ - Flash embedding parameters
 ** @wmode@ - Default 'window'

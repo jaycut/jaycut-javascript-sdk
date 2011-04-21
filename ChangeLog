@@ -1,3 +1,6 @@
+0.4.10
+	* add use_ssl option
+
 0.4.9
 	* Fixed problem with bad query string builds due to other js
 	libraries injecting properties into Array

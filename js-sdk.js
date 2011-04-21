@@ -25,7 +25,8 @@ var _jaycut = {
     'app_uri': '',
     'sitename': '',
     'sitename_in_path': false,
-    'api_host': 'api.jaycut.com'
+    'api_host': 'api.jaycut.com',
+    'use_ssl': false
   },
 
     __flashvars: {
@@ -153,12 +154,16 @@ var _jaycut = {
             this.__options['uri_authority'] += this.__options['api_host'];
         }
 
+
+        // Figure out if we're supposed to use https
+        var protocol = this.__options['use_ssl'] ? 'https' : 'http';
+
         if (options['loader_uri'] == null) {
-            this.__options['loader_uri'] = 'http://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
+            this.__options['loader_uri'] = protocol + '://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
         }
 
         if (this.__options['app_uri'] == '') {
-            this.__options['app_uri'] = 'http://' + this.__options['uri_authority'];
+            this.__options['app_uri'] = protocol + '://' + this.__options['uri_authority'];
             if (this.__options['sitename_in_path']) {
                 this.__options['app_uri'] += '/sites/' + this.__options['sitename'];
             }
@@ -248,7 +253,7 @@ function __ensureSWFObjectScriptIsLoaded() {
     script = document.createElement('script');
     script.id = 'swfObjectScript';
     script.type = 'text/javascript';
-    script.src = "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js";
+    script.src = "https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js";
     head.appendChild(script);
 }
 
