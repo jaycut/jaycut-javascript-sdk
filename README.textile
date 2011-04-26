@@ -8,7 +8,9 @@ h2. Access
 We recommend that you load the javascript from our servers specifying
 only the major version number, like this:
 
-* http://api.jaycut.com/assets/javascripts/sdk.0.4.js
+* http://SITENAME.api.jaycut.com/assets/javascripts/sdk.0.4.js
+
+where SITENAME is the name you chose when you signed up for api access.
 
 These are actually aliases to the latest minor version of the
 specified major. This makes sure you get the latest bugfixes but you
@@ -70,7 +72,7 @@ var login_uri = 'YOUR-LOGIN-URL-HERE';
 
 // The options hash can contain more but this is the bare minimum
 var options = {
-  'sitename': sitename,
+  'sitename': site_name,
   'login_uri': login_uri
 }
 
