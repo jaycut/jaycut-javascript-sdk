@@ -219,6 +219,11 @@ JC.subscribe('add_media_source_selected', function(data) {
         // event_data: media_source_id (string - can be either 'local', 'cam', 'mic' or the id of your Custom Media Source, if you have added one.
         alert('The user wants to add media via ' + data.media_source_id);
 });
+JC.subscribe('exporter_closed_completed', function() {
+
+        // event: exporter_closed_completed
+        // This is fired when a user completes an export, and clicks the next button (which has now changed to "close") in the wizard.
+});
 </script>
 </body>
 </html>
