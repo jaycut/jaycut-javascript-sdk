@@ -134,9 +134,12 @@ var _jaycut = {
                 //leave them alone.
             } else {
                 // If it's not in __options, it's considered a flashvar.
-
+                var value = options[key];
+                if (isArray(value)) {
+                  value = JSON.stringify(value);
+                } 
                 // pass this on as a flashVar, making sure it is camelCase
-                this.__flashvars[underscoreToCamel(key)] = options[key];
+                this.__flashvars[underscoreToCamel(key)] = value;
             }
         }
 
