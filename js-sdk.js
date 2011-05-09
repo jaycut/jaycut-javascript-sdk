@@ -205,7 +205,7 @@ var _jaycut = {
         __ensureSWFObjectScriptIsLoaded();
 		__ensureJSONIsAvailable();
 
-        __run_when_swfobject_available(function() {
+        __run_when_all_scripts_available(function() {
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
                                _jaycut.__options['embed_width'], _jaycut.__options['embed_height'], '9.0.0',
                                _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams
@@ -284,18 +284,18 @@ function __loadExternalScript(id, url) {
 }
 
 /**
- * Patiently waits until SWFObject is loaded,
+ * Patiently waits until dependencies is loaded,
  * then calls the passed function func. Make sure you call
- * __ensureSWFObjectScriptIsLoaded before calling this!
+ * __ensureSWFObjectScriptIsLoaded and __ensureJSONIsAvailable before calling this!
  *
- * @func The closure to call when SWFObject is loaded.
+ * @func The closure to call when all dependencies is loaded.
  *
  **/
-var __run_when_swfobject_available = function(func) {
-    if (window.swfobject !== undefined)
+var __run_when_all_scripts_available = function(func) {
+    if (window.swfobject !== undefined && JSON !== undefined)
         func();
     else
-        setTimeout(function() { __run_when_swfobject_available(func) }, 50);
+        setTimeout(function() { __run_when_all_scripts_available(func) }, 50);
 }
 
 function isArray(obj) {
