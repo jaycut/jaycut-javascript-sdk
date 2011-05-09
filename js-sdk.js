@@ -268,7 +268,7 @@ function __ensureSWFObjectScriptIsLoaded() {
  * we need to load it externally. Thank you, cdnjs.com!
  **/
 function __ensureJSONIsAvailable() {
-    if (JSON !== undefined) {
+    if (typeof(JSON) != 'undefined') {
         // Already present (IE8+) no need to load.
         return;
     }
