@@ -203,6 +203,7 @@ var _jaycut = {
         }
 
         __ensureSWFObjectScriptIsLoaded();
+		__ensureJSONIsAvailable();
 
         __run_when_swfobject_available(function() {
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
@@ -256,11 +257,29 @@ function __ensureSWFObjectScriptIsLoaded() {
         // Already loaded on the calling domain, don't include twice.
         return;
     }
-    var head = document.getElementsByTagName("head")[0];
+	__loadExternalScript('swfObjectScript', 
+						 'https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js');
+}
+                                    
+/**
+ * Some browsers doesn't include the JSON object, and in those cases
+ * we need to load it externally. Thank you, cdnjs.com!
+ **/
+function __ensureJSONIsAvailable() {
+    if (JSON !== undefined) {
+        // Already present (IE8+) no need to load.
+        return;
+    }
+	__loadExternalScript('json2Script', 
+						 'http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js');
+} 
+
+function __loadExternalScript(id, url) {
+	var head = document.getElementsByTagName("head")[0];
     var script = document.createElement('script');
-    script.id = 'swfObjectScript';
+    script.id = id;
     script.type = 'text/javascript';
-    script.src = "https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js";
+    script.src = url;
     head.appendChild(script);
 }
 
