@@ -1,3 +1,6 @@
+"use strict";
+/*global swfobject */
+
 /*
  * Copyright (c) 2011, JayCut AB
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
@@ -137,7 +140,8 @@ var _jaycut = {
                 var value = options[key];
                 if (isArray(value)) {
                   value = JSON.stringify(value);
-                } 
+                }
+				value = encodeURIComponent(value);
                 // pass this on as a flashVar, making sure it is camelCase
                 this.__flashvars[underscoreToCamel(key)] = value;
             }
@@ -253,7 +257,7 @@ function __ensureSWFObjectScriptIsLoaded() {
         return;
     }
     var head = document.getElementsByTagName("head")[0];
-    script = document.createElement('script');
+    var script = document.createElement('script');
     script.id = 'swfObjectScript';
     script.type = 'text/javascript';
     script.src = "https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js";
