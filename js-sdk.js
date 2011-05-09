@@ -124,88 +124,90 @@ var _jaycut = {
     },
 
     init: function(options) {
-        for (var key in options) {
-            if (key == 'flashparams') {
-                for (var k in options['flashparams']) {
-                    this.__flashparams[k] = options['flashparams'][k]
-                }
-            } else if (this.__options[key] != null) {
-                // If it's part of the existing options, it's not a flashvar, just set it.
-                this.__options[key] = options[key];
-            } else if (key == 'applet_params') {
-                //these are parameters that should be added to app_uri
-                //leave them alone.
-            } else {
-                // If it's not in __options, it's considered a flashvar.
-                var value = options[key];
-                if (isArray(value)) {
-                  value = JSON.stringify(value);
-                }
-				value = encodeURIComponent(value);
-                // pass this on as a flashVar, making sure it is camelCase
-                this.__flashvars[underscoreToCamel(key)] = value;
-            }
-        }
-
-        // If no bgcolor set via flashparams, use from flashvars.
-        if (this.__flashparams['bgcolor'] == null)
-          this.__flashparams['bgcolor'] = this.__flashvars['bgcolor'];
-
-
-        // Build the uri_authority from sitename and api-host
-        if (options['uri_authority'] == null) {
-            this.__options['uri_authority'] = '';
-            if (!this.__options['sitename_in_path']) {
-                this.__options['uri_authority'] += this.__options['sitename'] + '.'
-            }
-            this.__options['uri_authority'] += this.__options['api_host'];
-        }
-
-
-        // Figure out if we're supposed to use https
-        var protocol = this.__options['use_ssl'] ? 'https' : 'http';
-
-        if (options['loader_uri'] == null) {
-            this.__options['loader_uri'] = protocol + '://' + this.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
-        }
-
-        if (this.__options['app_uri'] == '') {
-            this.__options['app_uri'] = protocol + '://' + this.__options['uri_authority'];
-            if (this.__options['sitename_in_path']) {
-                this.__options['app_uri'] += '/sites/' + this.__options['sitename'];
-            }
-            this.__options['app_uri'] += '/applets/' + this.__options['applet'] + '.xml';
-            this.__options['app_uri'] += '?version=' + this.__options['version'];
-            this.__options['app_uri'] += '&loader=' + encodeURIComponent(this.__options['loader']);
-
-            //Add any explicitly stated query parameters to app_uri
-            var extra_params = hash_to_querystring(options['applet_params']);
-            if (extra_params != "") {
-                this.__options['app_uri'] += '&' + extra_params
-            }
-
-            if (this.__options['chain'] != false) {
-                this.__options['app_uri'] += '&chain=' + this.__options['chain'];
-
-                // Let chained applet use same loader unless otherwise specified
-                if (this.__options['chain_params']['loader'] == null) {
-                    this.__options['chain_params']['loader'] = this.__options['loader'];
-                }
-
-                this.__options['app_uri'] += '&' + hash_to_querystring({ 'chain_params': this.__options['chain_params'] });
-            }
-        }
-
-        this.__flashvars.applicationUri = encodeURIComponent(this.__options['app_uri']);
-
-        if (this.__options['login_uri'] != null) {
-            this.__flashvars.loginUri = encodeURIComponent(this.__options['login_uri']);
-        }
 
         __ensureSWFObjectScriptIsLoaded();
 		__ensureJSONIsAvailable();
 
         __run_when_all_scripts_available(function() {
+		
+	    	for (var key in options) {
+	            if (key == 'flashparams') {
+	                for (var k in options['flashparams']) {
+	                    _jaycut.__flashparams[k] = options['flashparams'][k]
+	                }
+	            } else if (_jaycut.__options[key] != null) {
+	                // If it's part of the existing options, it's not a flashvar, just set it.
+	                _jaycut.__options[key] = options[key];
+	            } else if (key == 'applet_params') {
+	                //these are parameters that should be added to app_uri
+	                //leave them alone.
+	            } else {
+	                // If it's not in __options, it's considered a flashvar.
+	                var value = options[key];
+	                if (isArray(value)) {
+	                  value = JSON.stringify(value);
+	                }
+					value = encodeURIComponent(value);
+	                // pass this on as a flashVar, making sure it is camelCase
+	                _jaycut.__flashvars[underscoreToCamel(key)] = value;
+	            }
+	        }
+
+	        // If no bgcolor set via flashparams, use from flashvars.
+	        if (_jaycut.__flashparams['bgcolor'] == null)
+	          _jaycut.__flashparams['bgcolor'] = _jaycut.__flashvars['bgcolor'];
+
+
+	        // Build the uri_authority from sitename and api-host
+	        if (options['uri_authority'] == null) {
+	            _jaycut.__options['uri_authority'] = '';
+	            if (!_jaycut.__options['sitename_in_path']) {
+	                _jaycut.__options['uri_authority'] += _jaycut.__options['sitename'] + '.'
+	            }
+	            _jaycut.__options['uri_authority'] += _jaycut.__options['api_host'];
+	        }
+
+
+	        // Figure out if we're supposed to use https
+	        var protocol = _jaycut.__options['use_ssl'] ? 'https' : 'http';
+
+	        if (options['loader_uri'] == null) {
+	            _jaycut.__options['loader_uri'] = protocol + '://' + _jaycut.__options['uri_authority'] + '/assets/flash/ApplicationLoader.swf'
+	        }
+
+	        if (_jaycut.__options['app_uri'] == '') {
+	            _jaycut.__options['app_uri'] = protocol + '://' + _jaycut.__options['uri_authority'];
+	            if (_jaycut.__options['sitename_in_path']) {
+	                _jaycut.__options['app_uri'] += '/sites/' + _jaycut.__options['sitename'];
+	            }
+	            _jaycut.__options['app_uri'] += '/applets/' + _jaycut.__options['applet'] + '.xml';
+	            _jaycut.__options['app_uri'] += '?version=' + _jaycut.__options['version'];
+	            _jaycut.__options['app_uri'] += '&loader=' + encodeURIComponent(_jaycut.__options['loader']);
+
+	            //Add any explicitly stated query parameters to app_uri
+	            var extra_params = hash_to_querystring(options['applet_params']);
+	            if (extra_params != "") {
+	                _jaycut.__options['app_uri'] += '&' + extra_params
+	            }
+
+	            if (_jaycut.__options['chain'] != false) {
+	                _jaycut.__options['app_uri'] += '&chain=' + _jaycut.__options['chain'];
+
+	                // Let chained applet use same loader unless otherwise specified
+	                if (_jaycut.__options['chain_params']['loader'] == null) {
+	                    _jaycut.__options['chain_params']['loader'] = _jaycut.__options['loader'];
+	                }
+
+	                _jaycut.__options['app_uri'] += '&' + hash_to_querystring({ 'chain_params': _jaycut.__options['chain_params'] });
+	            }
+	        }
+
+	        _jaycut.__flashvars.applicationUri = encodeURIComponent(_jaycut.__options['app_uri']);
+
+	        if (_jaycut.__options['login_uri'] != null) {
+	            _jaycut.__flashvars.loginUri = encodeURIComponent(_jaycut.__options['login_uri']);
+	        }
+
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
                                _jaycut.__options['embed_width'], _jaycut.__options['embed_height'], '9.0.0',
                                _jaycut.__options['loader_uri'], _jaycut.__flashvars, _jaycut.__flashparams
