@@ -294,7 +294,7 @@ function __loadExternalScript(id, url) {
  *
  **/
 var __run_when_all_scripts_available = function(func) {
-    if (window.swfobject !== undefined && JSON !== undefined)
+    if (window.swfobject !== undefined && typeof(JSON) != 'undefined')
         func();
     else
         setTimeout(function() { __run_when_all_scripts_available(func) }, 50);
