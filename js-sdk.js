@@ -129,7 +129,7 @@ var _jaycut = {
 		__ensureJSONIsAvailable();
 
         __run_when_all_scripts_available(function() {
-		
+
 	    	for (var key in options) {
 	            if (key == 'flashparams') {
 	                for (var k in options['flashparams']) {
@@ -259,10 +259,10 @@ function __ensureSWFObjectScriptIsLoaded() {
         // Already loaded on the calling domain, don't include twice.
         return;
     }
-	__loadExternalScript('swfObjectScript', 
-						 'https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js');
+	__loadExternalScript('swfObjectScript',
+			     'https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js');
 }
-                                    
+
 /**
  * Some browsers doesn't include the JSON object, and in those cases
  * we need to load it externally. Thank you, cdnjs.com!
@@ -272,9 +272,9 @@ function __ensureJSONIsAvailable() {
         // Already present (IE8+) no need to load.
         return;
     }
-	__loadExternalScript('json2Script', 
-						 'http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js');
-} 
+	__loadExternalScript('json2Script',
+			     'http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js');
+}
 
 function __loadExternalScript(id, url) {
 	var head = document.getElementsByTagName("head")[0];
