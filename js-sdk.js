@@ -1,10 +1,9 @@
 "use strict";
 /*global swfobject */
 
-/*
- * Copyright (c) 2011, JayCut AB
+/**
+ * @license Copyright (c) 2011, JayCut AB
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
- *
  */
 
 
