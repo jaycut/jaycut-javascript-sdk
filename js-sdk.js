@@ -41,7 +41,7 @@ var _jaycut = {
         'allowFullScreen': 'true'
     },
 
-    embed_mixer: function(options) {
+    'embed_mixer': function(options) {
 
         var p_target;
 
@@ -64,7 +64,7 @@ var _jaycut = {
         this.init(options);
     },
 
-    embed_uploader: function(options) {
+    'embed_uploader': function(options) {
 
         var p_target;
 
@@ -86,7 +86,7 @@ var _jaycut = {
         this.init(options);
     },
 
-    embed_recorder: function(options) {
+    'embed_recorder': function(options) {
 
         var p_target;
 
@@ -108,12 +108,12 @@ var _jaycut = {
         this.init(options);
     },
 
-    subscribe: function(event_name, func) {
-        this.__event_handlers[event_name] = func;
+    'subscribe': function(event_name, func) {
+        _jaycut.__event_handlers[event_name] = func;
     },
 
-    trigger: function(event_name, data) {
-        var func = this.__event_handlers[event_name];
+    'trigger': function(event_name, data) {
+        var func = _jaycut.__event_handlers[event_name];
         if (func != null) {
             if (data)
                 return func(data);
