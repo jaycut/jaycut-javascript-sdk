@@ -58,10 +58,10 @@ var _jaycut = {
         // feeds, filter and styles are parameters to the mixer
         // applet so they need to move either into chain_params
         // or applet_params.
-        this.__move_keys(options, ['feeds', 'filter', 'styles'], p_target)
+        _jaycut.__move_keys(options, ['feeds', 'filter', 'styles'], p_target)
 
         // Now we're all set to call init
-        this.init(options);
+        _jaycut.init(options);
     },
 
     'embed_uploader': function(options) {
@@ -78,12 +78,12 @@ var _jaycut = {
             p_target = 'chain_params';
         }
 
-        this.__move_keys(options, ['styles'], p_target);
+        _jaycut.__move_keys(options, ['styles'], p_target);
 
         options['embed_width'] = '735px';
         options['embed_height'] = '320px';
 
-        this.init(options);
+        _jaycut.init(options);
     },
 
     'embed_recorder': function(options) {
@@ -100,12 +100,12 @@ var _jaycut = {
             p_target = 'chain_params';
         }
 
-        this.__move_keys(options, ['styles'], p_target);
+        _jaycut.__move_keys(options, ['styles'], p_target);
 
         options['embed_width'] = '735px';
         options['embed_height'] = '320px';
 
-        this.init(options);
+        _jaycut.init(options);
     },
 
     'subscribe': function(event_name, func) {
