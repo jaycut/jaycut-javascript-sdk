@@ -61,7 +61,7 @@ var _jaycut = {
         _jaycut.__move_keys(options, ['feeds', 'filter', 'styles'], p_target)
 
         // Now we're all set to call init
-        _jaycut.init(options);
+        _jaycut.__init(options);
     },
 
     'embed_uploader': function(options) {
@@ -83,7 +83,7 @@ var _jaycut = {
         options['embed_width'] = '735px';
         options['embed_height'] = '320px';
 
-        _jaycut.init(options);
+        _jaycut.__init(options);
     },
 
     'embed_recorder': function(options) {
@@ -105,7 +105,7 @@ var _jaycut = {
         options['embed_width'] = '735px';
         options['embed_height'] = '320px';
 
-        _jaycut.init(options);
+        _jaycut.__init(options);
     },
 
     'subscribe': function(event_name, func) {
@@ -122,7 +122,7 @@ var _jaycut = {
         }
     },
 
-    init: function(options) {
+    __init: function(options) {
 
         __ensureSWFObjectScriptIsLoaded();
 		__ensureJSONIsAvailable();
@@ -352,5 +352,5 @@ function __query_parts(x, root) {
     }
 }
 
-//var JC = _jaycut; // shorthand!
+_jaycut['init'] = _jaycut.__init
 window['JC'] = _jaycut;
