@@ -201,10 +201,10 @@ var _jaycut = {
 	            }
 	        }
 
-	        _jaycut.__flashvars.applicationUri = encodeURIComponent(_jaycut.__options['app_uri']);
+	        _jaycut.__flashvars['applicationUri'] = encodeURIComponent(_jaycut.__options['app_uri']);
 
 	        if (_jaycut.__options['login_uri'] != null) {
-	            _jaycut.__flashvars.loginUri = encodeURIComponent(_jaycut.__options['login_uri']);
+	            _jaycut.__flashvars['loginUri'] = encodeURIComponent(_jaycut.__options['login_uri']);
 	        }
 
             swfobject.embedSWF(_jaycut.__options['loader_uri'], _jaycut.__options['embed_target'],
