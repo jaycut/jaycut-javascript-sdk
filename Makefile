@@ -1,7 +1,7 @@
 MINIFIER=./closure_compile.sh
 
 # Files to compile
-JS_FILES=$(shell find . -type f \( -name '*.js' -not -name '*.min.js' \) -printf '%p ')
+JS_FILES=$(shell find . -maxdepth 1 -type f \( -name '*.js' -not -name '*.min.js' \) -printf '%p ')
 
 JS_MINIFIED= $(JS_FILES:.js=.min.js)
 

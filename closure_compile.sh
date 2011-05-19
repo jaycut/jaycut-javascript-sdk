@@ -20,12 +20,18 @@ TEMP_FILE=mktemp
 cat $@ > $TEMP_FILE
 
 CLOSURE_URL=http://closure-compiler.appspot.com/compile
-COMPILATION_LEVEL=WHITESPACE_ONLY
+COMPILATION_LEVEL=ADVANCED_OPTIMIZATIONS
 CURL_OPTS='-s'
 
 COMMON_FIELDS="--data-urlencode js_code@$TEMP_FILE -d compilation_level=$COMPILATION_LEVEL"
+
+# Add all extern declarations in externs/
+for extern in externs/*.js; do
+    COMMON_FIELDS="$COMMON_FIELDS --data-urlencode js_externs@$extern"
+done
+
 COMPILE_FIELDS="-d output_info=compiled_code -d output_format=text"
-TESTRUN_FIELDS="-d output_info=errors -d output_format=text"
+TESTRUN_FIELDS="-d output_info=warnings -d output_format=text -d warning_level=VERBOSE"
 
 ERRORS=`curl $CURL_OPTS $COMMON_FIELDS $TESTRUN_FIELDS $CLOSURE_URL`
 
