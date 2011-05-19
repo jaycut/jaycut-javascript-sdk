@@ -352,4 +352,5 @@ function __query_parts(x, root) {
     }
 }
 
-var JC = _jaycut; // shorthand!
+//var JC = _jaycut; // shorthand!
+window['JC'] = _jaycut;
