@@ -35,10 +35,10 @@ var _jaycut = {
       'bgcolor': '#000000'
     },
     __flashparams: {
-        wmode: 'window',
-        allowScriptAccess: 'always',
-        allowNetworking: 'all',
-        allowFullScreen: 'true'
+        'wmode': 'window',
+        'allowScriptAccess': 'always',
+        'allowNetworking': 'all',
+        'allowFullScreen': 'true'
     },
 
     embed_mixer: function(options) {
