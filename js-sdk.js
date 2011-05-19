@@ -289,7 +289,7 @@ function __loadExternalScript(id, url) {
  * then calls the passed function func. Make sure you call
  * __ensureSWFObjectScriptIsLoaded and __ensureJSONIsAvailable before calling this!
  *
- * @func The closure to call when all dependencies is loaded.
+ * @param {function()} func The closure to call when all dependencies is loaded.
  *
  **/
 var __run_when_all_scripts_available = function(func) {
